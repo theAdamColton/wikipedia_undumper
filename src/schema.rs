@@ -1,7 +1,7 @@
 //! Defines a schema for elements from the wikipedia xml dump
 use serde::Deserialize;
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, PartialEq, Eq)]
 #[serde(from = "i32")]
 /// Wikipedia namespace
 ///  see: https://en.wikipedia.org/wiki/Wikipedia:Namespace
@@ -77,7 +77,7 @@ pub enum Namespace {
     /// Talk page for gadgets
     GadgetDefinitionTalk,
     /// Unknown namespace code
-    Unknown
+    Unknown,
 }
 
 impl From<i32> for Namespace {
@@ -120,7 +120,7 @@ impl From<i32> for Namespace {
 
 #[derive(Debug, Deserialize)]
 pub struct Redirect {
-    #[serde(rename="@title")]
+    #[serde(rename = "@title")]
     pub title: String,
 }
 
@@ -129,7 +129,8 @@ pub struct Page {
     pub title: String,
     pub ns: Namespace,
     pub id: u32,
-    pub revision: Vec<Revision>,
+    #[serde(rename = "revision")]
+    pub revisions: Vec<Revision>,
     pub redirect: Option<()>,
 }
 
@@ -137,7 +138,7 @@ pub struct Page {
 pub struct Contributer {
     pub username: Option<String>,
     pub ip: Option<String>,
-    pub id: Option<u32>
+    pub id: Option<u32>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -145,9 +146,9 @@ pub struct Minor;
 
 #[derive(Debug, Deserialize)]
 pub struct Text {
-    #[serde(rename="@bytes")]
+    #[serde(rename = "@bytes")]
     pub bytes: i32,
-    #[serde(rename="$value")]
+    #[serde(rename = "$value")]
     pub text: String,
 }
 
@@ -164,4 +165,3 @@ pub struct Revision {
     pub sha1: String,
     pub text: Text,
 }
-
