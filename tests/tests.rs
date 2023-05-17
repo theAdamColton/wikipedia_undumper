@@ -53,7 +53,11 @@ True Abrahamic religions are [[monotheism|monotheistic]] (the belief that there 
 "#;
 
 #[cfg(test)]
-mod page_tests {
+mod tests {
+
+    use std::{io::BufReader, fs::File};
+
+    use wikipedia_undumper::Undumper;
 
     use super::*;
 
@@ -82,5 +86,16 @@ mod page_tests {
             p.revisions[0].contributor.ip
                 == Some("2603:6081:2A07:61B7:A1DC:D620:40E5:DD2B".to_string())
         );
+    }
+
+    #[test]
+    fn test_deserialize_medium() {
+        let filepath = "./res/medium.xml";
+        let f = File::open(filepath).unwrap();
+        let bufreader = BufReader::new(f);
+        let wikipedia_undumper = Undumper::from_reader(bufreader);
+        for res in wikipedia_undumper.into_iter() {
+            println!("{:?}", res);
+        }
     }
 }
