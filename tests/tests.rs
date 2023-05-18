@@ -81,7 +81,7 @@ mod tests {
         assert!(p.revisions[0].comment == Some("Reverted a mistake".to_string()));
         assert!(p.revisions[0].model == "wikitext".to_string());
         assert!(p.revisions[0].format == "text/x-wiki".to_string());
-        assert!(p.revisions[0].parentid == 7782230);
+        assert!(p.revisions[0].parentid == Some(7782230));
         assert!(
             p.revisions[0].contributor.ip
                 == Some("2603:6081:2A07:61B7:A1DC:D620:40E5:DD2B".to_string())

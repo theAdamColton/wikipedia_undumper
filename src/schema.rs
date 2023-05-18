@@ -149,13 +149,13 @@ pub struct Text {
     #[serde(rename = "@bytes")]
     pub bytes: i32,
     #[serde(rename = "$value")]
-    pub text: String,
+    pub text: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct Revision {
     pub id: u32,
-    pub parentid: u32,
+    pub parentid: Option<u32>,
     pub timestamp: String,
     pub contributor: Contributer,
     pub minor: Option<Minor>,
