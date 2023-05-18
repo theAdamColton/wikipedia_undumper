@@ -94,9 +94,9 @@ mod tests {
         let f = File::open(filepath).unwrap();
         let bufreader = BufReader::new(f);
         let wikipedia_undumper = Undumper::from_reader(bufreader);
-        for res in wikipedia_undumper.into_iter() {
-            //println!("{:?}", res);
-            assert!(res.is_ok());
+        for page_result in wikipedia_undumper.into_iter() {
+            let page = page_result.unwrap();
+            println!("{:?}", page);
         }
     }
 }

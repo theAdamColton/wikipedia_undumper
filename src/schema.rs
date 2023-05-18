@@ -80,6 +80,44 @@ pub enum Namespace {
     Unknown,
 }
 
+impl Namespace {
+    pub fn to_int(&self) -> i32 {
+        match self {
+        Namespace::Media => -2,
+        Namespace::Special => -1,
+        Namespace::Main => 0,
+        Namespace::Talk => 1,
+        Namespace::User => 2,
+        Namespace::UserTalk => 3,
+        Namespace::Wikipedia => 4,
+        Namespace::WikipediaTalk => 5,
+        Namespace::File => 6,
+        Namespace::FileTalk => 7,
+        Namespace::MediaWiki => 8,
+        Namespace::MediaWikiTalk => 9,
+        Namespace::Template => 10,
+        Namespace::TemplateTalk => 11,
+        Namespace::Help => 12,
+        Namespace::HelpTalk => 13,
+        Namespace::Category => 14,
+        Namespace::CategoryTalk => 15,
+        Namespace::Portal => 100,
+        Namespace::PortalTalk => 101,
+        Namespace::Draft => 118,
+        Namespace::DraftTalk => 119,
+        Namespace::TimedText => 710,
+        Namespace::TimedTextTalk => 711,
+        Namespace::Module => 828,
+        Namespace::ModuleTalk => 829,
+        Namespace::Gadget => 2300,
+        Namespace::GadgetTalk => 2301,
+        Namespace::GadgetDefinition => 2302,
+        Namespace::GadgetDefinitionTalk => 2303,
+        Namespace::Unknown => -999, 
+        }
+    }
+}
+
 impl From<i32> for Namespace {
     fn from(id: i32) -> Self {
         match id {
