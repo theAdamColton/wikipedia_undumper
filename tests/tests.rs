@@ -64,10 +64,10 @@ mod tests {
     #[test]
     fn test_deserialize_pages_is_ok() {
         let p: Result<Page, DeError> = from_str(XML_PAGE_REDIRECT);
-        println!("{:?}", p);
+        //println!("{:?}", p);
         assert!(p.is_ok());
         let p: Result<Page, DeError> = from_str(XML_PAGE_NORMAL);
-        println!("{:?}", p);
+        //println!("{:?}", p);
         assert!(p.is_ok());
     }
 
@@ -95,7 +95,8 @@ mod tests {
         let bufreader = BufReader::new(f);
         let wikipedia_undumper = Undumper::from_reader(bufreader);
         for res in wikipedia_undumper.into_iter() {
-            println!("{:?}", res);
+            //println!("{:?}", res);
+            assert!(res.is_ok());
         }
     }
 }
